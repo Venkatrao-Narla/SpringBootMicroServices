@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.common.models.Payement" table="payment">
+		<id name="paymentId" column="pid" />
+		<discriminator column="pmode" type="string" />
+		<property name="amount" column="amount" />
+		<property name="paymentDate" column="pdate" />
+		<subclass name="com.common.models.Card" 
+			discriminator-value="CC">
+			<property name="cardNumber" column="cno" />
+			<property name="cardType" column="ctype" />
+		</subclass>
+		<subclass name="com.common.models.Cheque" 
+			discriminator-value="CH">
+			<property name="chequeNumber" column="chno" />
+			<property name="chequeType" column="chtype" />
+		</subclass>
+	</class>
+</hibernate-mapping>
